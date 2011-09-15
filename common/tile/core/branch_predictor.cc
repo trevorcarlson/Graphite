@@ -1,6 +1,7 @@
 #include "simulator.h"
 #include "branch_predictor.h"
 #include "one_bit_branch_predictor.h"
+#include "pentium_m_branch_predictor.h"
 
 BranchPredictor::BranchPredictor()
 {
@@ -30,6 +31,10 @@ BranchPredictor* BranchPredictor::create()
       {
          UInt32 size = cfg->getInt("perf_model/branch_predictor/size");
          return new OneBitBranchPredictor(size);
+      }
+      else if (type == "pentium_m")
+      {
+         return new PentiumMBranchPredictor();
       }
       else
       {
